@@ -20,4 +20,8 @@ export class PrismaNotificationsRepository implements NotificationsRepository {
       data: raw,
     });
   }
+
+  async save(notification: Notification): Promise<void> {
+    throw new Error('Method not implemented');
+  }
 }
