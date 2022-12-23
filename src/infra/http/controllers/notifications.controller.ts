@@ -9,6 +9,7 @@ export class NotificationsController {
   @Post()
   async create(@Body() body: CreateNotificationBody) {
     const { recipientId, content, category } = body;
+    console.log("teste")
 
     const { notification } = await this.sendNotification.execute({
       recipientId,
