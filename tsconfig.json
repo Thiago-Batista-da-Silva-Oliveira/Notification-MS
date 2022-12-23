@@ -8,6 +8,7 @@
     "allowSyntheticDefaultImports": true,
     "target": "es2017",
     "sourceMap": true,
+    "resolveJsonModule": true,
     "outDir": "./dist",
     "baseUrl": "./",
     "incremental": true,
@@ -23,7 +24,7 @@
       "@application/*": ["./src/application/*"],
       "@helpers/*": ["./src/helpers/*"],
       "@infra/*": ["./src/infra/*"],
-      "@tests/*": ["./tests/*"],
+      "@tests/*": ["./tests/*"]
     }
   }
 }
