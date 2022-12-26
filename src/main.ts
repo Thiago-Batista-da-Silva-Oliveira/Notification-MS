@@ -9,9 +9,5 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
 
   await app.listen(3337, () => console.log('Server started'));
-
-  const rabbitMq = new RabbitMqProvider();
-
-  await rabbitMq.consume('notification');
 }
 bootstrap();
