@@ -1,0 +1,17 @@
+version: "3.7"
+services:
+  rabbitmq:
+    image: rabbitmq:3.8.25-management-alpine
+    container_name: 'notification-rabbitmq'
+    ports:
+        - 5673:5672
+        - 15673:15672
+    volumes:
+        - ./rabbitmq/data/:/var/lib/rabbitmq/
+        - ./rabbitmq/log/:/var/log/rabbitmq/
+  app:
+    build: .
+    container_name: notificationMS
+    volumes:
+      - .:/usr/app
+    network_mode: host
