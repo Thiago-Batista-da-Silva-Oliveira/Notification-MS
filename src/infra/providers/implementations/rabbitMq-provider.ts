@@ -14,6 +14,8 @@ class RabbitMqProvider implements IRabbitMqProvider {
       await this.createChannel();
     }
 
+    console.log(exchangeName);
+
     const exchange = rabbitMq.exchangeName.find(
       (data) => data.name === exchangeName,
     );

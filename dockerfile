@@ -14,4 +14,4 @@ RUN npx prisma generate
 RUN apk add --no-cache tzdata
 ENV TZ=America/Sao_Paulo
 
-CMD ["npm", "start"]
+CMD ["npm", "run" ,"start:dev"]

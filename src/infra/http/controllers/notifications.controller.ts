@@ -7,6 +7,12 @@ import { GetRecipientNotifications } from '@application/use-cases/get-recipient-
 import { CountRecipientNotifications } from '@application/use-cases/count-recipient-notifications';
 import { ReadNotification } from '@application/use-cases/read-notification';
 import { UnreadNotification } from '@application/use-cases/unread-notification';
+import {
+  Ctx,
+  MessagePattern,
+  Payload,
+  RmqContext,
+} from '@nestjs/microservices';
 
 @Controller('notifications')
 export class NotificationsController {
@@ -75,5 +81,17 @@ export class NotificationsController {
     return {
       notification: NotificationViewModel.toHTTP(notification),
     };
+  }
+
+  @MessagePattern('notification')
+  async getNotifications(@Payload() data: any, @Ctx() context: RmqContext) {
+    const { message } = JSON.parse(context.getMessage().content);
+    console.log(message);
+
+    await this.create({
+      category: message.category,
+      content: message.content,
+      recipientId: message.recipientId,
+    });
   }
 }

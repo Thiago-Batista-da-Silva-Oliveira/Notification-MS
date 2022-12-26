@@ -1,5 +1,5 @@
 export const rabbitMq = {
-  url: 'amqp://localhost',
+  url: 'amqp://localhost:5673',
   exchangeName: [
     {
       name: 'notification',

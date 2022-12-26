@@ -6,7 +6,7 @@ export class Content {
   }
 
   private validateContentLength(content: string) {
-    return content.length >= 5 && content.length <= 240;
+    return content.length >= 1 && content.length <= 240;
   }
 
   constructor(content: string) {

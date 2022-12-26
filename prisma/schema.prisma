@@ -2,7 +2,8 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl"]
 }
 
 datasource db {
@@ -11,13 +12,13 @@ datasource db {
 }
 
 model Notification {
-  id String @id
+  id          String    @id
   recipientId String
-  content String
-  category String
-  readAt DateTime?
-  canceledAt DateTime?
-  createdAt DateTime @default(now())
+  content     String
+  category    String
+  readAt      DateTime?
+  canceledAt  DateTime?
+  createdAt   DateTime  @default(now())
 
   @@index([recipientId])
 }
