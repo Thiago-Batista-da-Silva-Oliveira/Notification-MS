@@ -4,6 +4,7 @@ import { randomUUID } from 'node:crypto';
 
 export interface NotificationProps {
   recipientId: string;
+  senderId?: string | null;
   content: Content;
   category: string;
   readAt?: Date | null;
@@ -36,6 +37,18 @@ export class Notification {
 
   public get recipientId(): string {
     return this.props.recipientId;
+  }
+
+  public set senderId(senderId: string | null) {
+    this.props.senderId = senderId;
+  }
+
+  public get senderId(): string | null {
+    if (this.props.senderId) {
+      return this.props.senderId;
+    } else {
+      return null;
+    }
   }
 
   public set content(content: Content) {

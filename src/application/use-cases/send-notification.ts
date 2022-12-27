@@ -7,6 +7,7 @@ interface SendNotificationRequest {
   recipientId: string;
   content: string;
   category: string;
+  senderId?: string;
 }
 
 interface SendNotificationResponse {
@@ -20,13 +21,18 @@ export class SendNotification {
   async execute(
     request: SendNotificationRequest,
   ): Promise<SendNotificationResponse> {
-    const { recipientId, content, category } = request;
+    const { recipientId, content, category, senderId } = request;
+
+    console.log(`aqui ${senderId}`);
 
     const notification = new Notification({
       recipientId,
       content: new Content(content),
       category,
+      senderId,
     });
+
+    console.log(`uepa ${notification.senderId}`);
 
     await this.notificationsRepository.create(notification);
 

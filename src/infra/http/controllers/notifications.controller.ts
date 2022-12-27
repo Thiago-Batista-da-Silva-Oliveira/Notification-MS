@@ -70,12 +70,13 @@ export class NotificationsController {
 
   @Post('send')
   async create(@Body() body: CreateNotificationBody) {
-    const { content, category, recipientId } = body;
+    const { content, category, recipientId, senderId } = body;
 
     const { notification } = await this.sendNotification.execute({
       recipientId,
       content,
       category,
+      senderId,
     });
 
     return {
@@ -86,12 +87,12 @@ export class NotificationsController {
   @MessagePattern('notification')
   async getNotifications(@Payload() data: any, @Ctx() context: RmqContext) {
     const { message } = JSON.parse(context.getMessage().content);
-    console.log(message);
 
     await this.create({
       category: message.category,
       content: message.content,
       recipientId: message.recipientId,
+      senderId: message.senderId,
     });
   }
 }
