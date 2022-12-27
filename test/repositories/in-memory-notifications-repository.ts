@@ -37,4 +37,11 @@ export class InMemoryNotificationsRepository
       this.notifications[notificationIndex] = notification;
     }
   }
+
+  async findManyByRecipientAndSenderId(
+    recipientId: string,
+    senderId: string,
+  ): Promise<Notification[]> {
+    throw new Error('method not implemented');
+  }
 }
