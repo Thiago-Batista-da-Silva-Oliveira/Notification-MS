@@ -14,7 +14,7 @@ import {
   RmqContext,
 } from '@nestjs/microservices';
 
-@Controller('notifications')
+@Controller('')
 export class NotificationsController {
   constructor(
     private sendNotification: SendNotification,
@@ -68,7 +68,7 @@ export class NotificationsController {
     });
   }
 
-  @Post()
+  @Post('send')
   async create(@Body() body: CreateNotificationBody) {
     const { content, category, recipientId } = body;
 
