@@ -52,7 +52,6 @@ export class PrismaNotificationsRepository implements NotificationsRepository {
   }
 
   async save(notification: Notification): Promise<void> {
-    console.log(notification);
     const prismaNotificationData =
       PrismaNotificationMapper.toPrisma(notification);
 
