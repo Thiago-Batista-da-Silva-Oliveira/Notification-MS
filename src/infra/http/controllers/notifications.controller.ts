@@ -54,6 +54,17 @@ export class NotificationsController {
     };
   }
 
+  @Patch('readMessagesFrom')
+  async readMessagesFrom(@Param('recipientId') recipientId: string) {
+    const { notifications } = await this.getRecipientNotifications.execute({
+      recipientId,
+    });
+
+    return {
+      notifications: notifications.map(NotificationViewModel.toHTTP),
+    };
+  }
+
   @Patch(':id/read')
   async read(@Param('id') id: string) {
     await this.readNotification.execute({

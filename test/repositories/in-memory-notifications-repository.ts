@@ -42,6 +42,12 @@ export class InMemoryNotificationsRepository
     recipientId: string,
     senderId: string,
   ): Promise<Notification[]> {
-    throw new Error('method not implemented');
+    const notifications = this.notifications.filter(
+      (notification) =>
+        notification.recipientId === recipientId &&
+        notification.senderId === senderId,
+    );
+
+    return notifications;
   }
 }

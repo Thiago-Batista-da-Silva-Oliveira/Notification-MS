@@ -1,7 +1,7 @@
 import { NotificationNotFound } from './errors/notification-not-found';
 import { makeNotification } from '../../../test/factories/notification-factory';
 import { UnreadNotification } from './unread-notification';
-import { InMemoryNotificationsRepository } from 'test/repositories/in-memory-notifications-repository';
+import { InMemoryNotificationsRepository } from '../../../test/repositories/in-memory-notifications-repository';
 
 describe('Read notification', () => {
   it('should be able to read a existing notification', async () => {

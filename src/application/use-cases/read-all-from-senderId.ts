@@ -1,3 +1,4 @@
+import { Notification } from '@application/entities/notification';
 import { Injectable } from '@nestjs/common';
 import { NotificationsRepository } from '../repositories/notifications-repository';
 import { NotificationNotFound } from './errors/notification-not-found';
@@ -7,7 +8,9 @@ interface ReadNotificationsRequest {
   senderId: string;
 }
 
-type ReadNotificationResponse = void;
+type ReadNotificationResponse = {
+  notifications: Notification[];
+};
 
 @Injectable()
 export class ReadNotificationsFromTheSameUser {
@@ -32,5 +35,9 @@ export class ReadNotificationsFromTheSameUser {
       notification.read();
       await this.notificationsRepository.save(notification);
     });
+
+    return {
+      notifications,
+    };
   }
 }
