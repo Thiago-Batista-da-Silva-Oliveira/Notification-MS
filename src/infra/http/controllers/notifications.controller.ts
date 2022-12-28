@@ -14,6 +14,7 @@ import {
   RmqContext,
 } from '@nestjs/microservices';
 import { ReadNotificationsFromTheSameUser } from '@application/use-cases/read-all-from-senderId';
+import { GetNotReadRecipientNotifications } from '@application/use-cases/get-not-read-recipient-notifications';
 
 @Controller('')
 export class NotificationsController {
@@ -25,6 +26,7 @@ export class NotificationsController {
     private getRecipientNotifications: GetRecipientNotifications,
     private countRecipientNotifications: CountRecipientNotifications,
     private readNotificationsFrom: ReadNotificationsFromTheSameUser,
+    private getNotReadRecipientNotifications: GetNotReadRecipientNotifications,
   ) {}
 
   @Patch(':id/cancel')
@@ -50,6 +52,18 @@ export class NotificationsController {
     const { notifications } = await this.getRecipientNotifications.execute({
       recipientId,
     });
+
+    return {
+      notifications: notifications.map(NotificationViewModel.toHTTP),
+    };
+  }
+
+  @Get('notReadFrom/:recipientId')
+  async getNotReadFromRecipient(@Param('recipientId') recipientId: string) {
+    const { notifications } =
+      await this.getNotReadRecipientNotifications.execute({
+        recipientId,
+      });
 
     return {
       notifications: notifications.map(NotificationViewModel.toHTTP),

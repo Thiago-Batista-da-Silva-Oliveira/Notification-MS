@@ -31,10 +31,15 @@ export class ReadNotificationsFromTheSameUser {
       throw new NotificationNotFound();
     }
 
-    notifications.forEach(async (notification) => {
-      notification.read();
-      await this.notificationsRepository.save(notification);
-    });
+    for (let i = 0; i < notifications.length; i++) {
+      const handleNotifications = async () => {
+        const notification = notifications[i];
+        notification.read();
+        await this.notificationsRepository.save(notification);
+      };
+
+      await handleNotifications();
+    }
 
     return {
       notifications,

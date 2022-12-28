@@ -52,6 +52,7 @@ export class PrismaNotificationsRepository implements NotificationsRepository {
   }
 
   async save(notification: Notification): Promise<void> {
+    console.log(notification);
     const prismaNotificationData =
       PrismaNotificationMapper.toPrisma(notification);
 
@@ -76,6 +77,21 @@ export class PrismaNotificationsRepository implements NotificationsRepository {
           senderId: {
             equals: senderId,
           },
+        },
+      },
+    });
+
+    return notifications.map(PrismaNotificationMapper.toDomain);
+  }
+
+  async findManyNotReadByRecipientId(
+    recipientId: string,
+  ): Promise<Notification[]> {
+    const notifications = await this.prisma.notification.findMany({
+      where: {
+        recipientId,
+        AND: {
+          readAt: null,
         },
       },
     });
